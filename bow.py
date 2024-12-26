@@ -1,6 +1,6 @@
 import numpy as np
 
-def wordListTodict(aListofWords: list) -> dict:
+def wordToNumberDict(aListofWords: list) -> dict:
     result = {}
     for word in aListofWords:
         if word not in result:
