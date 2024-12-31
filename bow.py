@@ -32,11 +32,10 @@ def numberToWordDict(aListofWords: list) -> dict:
 
     return result
 
-
 def oneHotEncoding(aListofWords: list) -> dict:
     result = {}
     uniqueSet = deleteDuplicatesbySet(aListofWords)
     values = np.eye(len(uniqueSet))
-    result = dict(zip(uniqueSet, values))
+    result = dict(zip(uniqueSet, [v.tolist() for v in values]))
     
     return result
