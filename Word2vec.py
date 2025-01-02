@@ -39,12 +39,4 @@ model.compile(optimizer='adam', loss='categorical_crossentropy')
 
 model.summary()
 
-# model.fit(x = [front_input, back_input], y = cbow_y, epochs = 3000)
-
-
-# weights = model.layers[3].get_weights()[0]
-
-# resultVectors = []
-# for words in trainset.values():
-#     vecofWord = np.dot(model.layers[3].get_weights()[0], words)
-#     resultVectors.append(vecofWords)
+model.fit(x = [front_input, back_input], y = cbow_y, epochs = 3000)
