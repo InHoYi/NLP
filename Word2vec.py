@@ -4,12 +4,10 @@ import tensorflow as tf
 
 # Word2Vec (CBOW) 학습용 데이터셋
 dataset = [
-    "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog",
-    "i", "love", "deep", "learning", "and", "natural", "language", "processing",
-    "word2vec", "is", "a", "technique", "for", "learning", "word", "embeddings",
-    "machine", "learning", "is", "a", "subfield", "of", "artificial", "intelligence",
-    "data", "science", "involves", "statistics", "and", "programming",
-    "artificial", "intelligence", "is", "transforming", "the", "world"
+    "i", "love", "pizza",
+    "i", "like", "pizza",
+    "i", "like", "coffee",
+    "i", "love", "coffee"
 ]
 
 encodedDataset = bow.oneHotEncoding(dataset)
@@ -28,12 +26,12 @@ cbow_y = np.array(cbow_y)
 front_input = np.array([item[0] for item in cbow_x])
 back_input = np.array([item[1] for item in cbow_x])
 
-frontwordInput = tf.keras.layers.Input(shape=(35,))
-backwordInput = tf.keras.layers.Input(shape=(35,))
+frontwordInput = tf.keras.layers.Input(shape=(5,))
+backwordInput = tf.keras.layers.Input(shape=(5,))
 added = tf.keras.layers.Average()([frontwordInput, backwordInput])
 
 hiddenLayer = tf.keras.layers.Dense(64)(added)
-output = tf.keras.layers.Dense(35, activation='softmax')(hiddenLayer)
+output = tf.keras.layers.Dense(5, activation='softmax')(hiddenLayer)
 
 model = tf.keras.Model(inputs=[frontwordInput, backwordInput], outputs=output)
 
@@ -41,4 +39,4 @@ model.compile(optimizer='adam', loss='categorical_crossentropy')
 
 model.summary()
 
-model.fit(x = [front_input, back_input], y = y, epochs = 3000)
+model.fit(x = [front_input, back_input], y = cbow_y, epochs = 3000)
