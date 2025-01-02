@@ -30,7 +30,7 @@ frontwordInput = tf.keras.layers.Input(shape=(5,))
 backwordInput = tf.keras.layers.Input(shape=(5,))
 added = tf.keras.layers.Average()([frontwordInput, backwordInput])
 
-hiddenLayer = tf.keras.layers.Dense(64)(added)
+hiddenLayer = tf.keras.layers.Dense(2)(added)
 output = tf.keras.layers.Dense(5, activation='softmax')(hiddenLayer)
 
 model = tf.keras.Model(inputs=[frontwordInput, backwordInput], outputs=output)
@@ -39,4 +39,12 @@ model.compile(optimizer='adam', loss='categorical_crossentropy')
 
 model.summary()
 
-model.fit(x = [front_input, back_input], y = cbow_y, epochs = 3000)
+# model.fit(x = [front_input, back_input], y = cbow_y, epochs = 3000)
+
+
+# weights = model.layers[3].get_weights()[0]
+
+# resultVectors = []
+# for words in trainset.values():
+#     vecofWord = np.dot(model.layers[3].get_weights()[0], words)
+#     resultVectors.append(vecofWords)
